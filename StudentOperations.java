@@ -96,5 +96,25 @@ public class StudentOperations {
             System.out.println("Error: " + e.getMessage());
         }
     }
+    // Updates the name of a student identified by PRN
+    public void updateStudent(long prn, String newName) {
+        String sql = "UPDATE students SET name=? WHERE prn=?";
+        // Establishes a database connection and prepares a SQL statement using try-with-statements.
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            // Set the new name and the PRN
+            ps.setString(1, newName);
+            ps.setLong(2, prn);
+            // Execute the update and check if any row was updated
+            int rows = ps.executeUpdate();
+            if (rows > 0) {
+                System.out.println("Student updated successfully.");
+            } else {
+                System.out.println("Student not found.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
 
 }
