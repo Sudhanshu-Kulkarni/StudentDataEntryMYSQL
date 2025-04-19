@@ -8,5 +8,14 @@ public class Student {
         setName(name);  // Set the student's name using the setter method
         setPRN(prn);    // Set the student's PRN using the setter method
     }
+    // Setter method to update the student's name
+    public void setName(String name){
+        this.name = name;  // Assigns the given name to the instance variable
+    }
+
+    // Getter method to retrieve the student's name
+    public String getName() {
+        return name;  // Returns the student's name
+    }
 
 }
