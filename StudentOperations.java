@@ -21,4 +21,22 @@ public class StudentOperations {
             System.out.println("Error: " + e.getMessage());
         }
     }
+
+    // Displays all students from the database
+    public void displayStudents() {
+        String sql = "SELECT * FROM students";
+        // Establishes a database connection and prepares a SQL statement using try-with-statements.
+        try (Connection con = DBConnection.getConnection();
+             Statement st = con.createStatement();
+             ResultSet rs = st.executeQuery(sql)) {
+
+            // Iterate over the result set and print student details
+            while (rs.next()) {
+                System.out.println("Name: " + rs.getString("name") + ", PRN: " + rs.getLong("prn"));
+            }
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
 }
