@@ -88,3 +88,18 @@ public class Main {
                         System.out.println("Exiting... Thank you!");
                         break;
                 }
+            } catch (InvalidChoiceException e) {
+                // Catch and display custom exception message for invalid menu choice
+                System.out.println("Invalid Choice Error: " + e.getMessage());
+                choice = 0; // Prevents accidental exit from loop
+            } catch (Exception e) {
+                // Handle other exceptions gracefully
+                System.out.println("General Error: " + e.getMessage());
+                choice = 0;
+                scan.nextLine(); // Clear buffer to prevent input skipping
+            }
+        } while (choice != 8); // Loop until user chooses to exit
+
+        scan.close(); // Close scanner to prevent resource leak
+    }
+}
