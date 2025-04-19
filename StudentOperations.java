@@ -117,4 +117,24 @@ public class StudentOperations {
         }
     }
 
+    // Deletes a student from the database based on PRN
+    public void deleteStudent(long prn) {
+        String sql = "DELETE FROM students WHERE prn=?";
+        // Establishes a database connection and prepares a SQL statement using try-with-statements.
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            // Set the PRN of the student to delete
+            ps.setLong(1, prn);
+            // Execute deletion and check if any row was deleted
+            int rows = ps.executeUpdate();
+            if (rows > 0) {
+                System.out.println("Student deleted successfully.");
+            } else {
+                System.out.println("Student not found.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
 }
