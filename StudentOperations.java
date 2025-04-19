@@ -59,4 +59,22 @@ public class StudentOperations {
         }
     }
 
+    // Searches for students whose names contain the given string (case-insensitive)
+    public void searchByName(String name) {
+        String sql = "SELECT * FROM students WHERE name LIKE ?";
+        // Establishes a database connection and prepares a SQL statement using try-with-statements.
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            // Use wildcard % for partial matches
+            ps.setString(1, "%" + name + "%");
+            ResultSet rs = ps.executeQuery();
+            // Print each matching student
+            while (rs.next()) {
+                System.out.println("Name: " + rs.getString("name") + ", PRN: " + rs.getLong("prn"));
+            }
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
 }
